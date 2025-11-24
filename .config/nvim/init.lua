@@ -28,7 +28,7 @@ vim.diagnostic.config({ virtual_text = true })
 
 vim.g.mapleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y')
-vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
+vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+y$')
 vim.keymap.set('n', '<leader>q', '<cmd>update | bdelete<cr>')
 vim.keymap.set('n', '<leader>m', '<cmd>update | make<cr>')
 vim.keymap.set('n', '<leader>o', '<cmd>update | source<cr>')
@@ -36,11 +36,12 @@ vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<cr>')
 vim.keymap.set('n', '<leader>a', '<cmd>edit #<cr>')
 vim.keymap.set('n', '<leader>e', '<cmd>edit .<cr>')
 vim.keymap.set('n', '<leader>E', '<cmd>Open .<cr>')
-vim.keymap.set('n', '-', '<cmd>Oil<cr>')
 vim.keymap.set('n', '<leader>f', '<cmd>Pick files<cr>')
 vim.keymap.set('n', '<leader>g', '<cmd>Pick grep_live<cr>')
 vim.keymap.set('n', '<leader>r', '<cmd>Pick buffers<cr>')
 vim.keymap.set('n', '<leader>h', '<cmd>Pick help<cr>')
+vim.keymap.set('n', '-', '<cmd>Oil<cr>')
+vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 
 require('paq') {
     'neovim/nvim-lspconfig',
