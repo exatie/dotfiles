@@ -23,7 +23,7 @@ vim.opt.splitright = true
 vim.opt.undofile = true
 vim.opt.title = true
 
-vim.lsp.enable({ 'clangd', 'rust_analyzer', 'pylsp' })
+vim.lsp.enable('clangd')
 vim.diagnostic.config({ virtual_text = true })
 
 vim.g.mapleader = ' '
