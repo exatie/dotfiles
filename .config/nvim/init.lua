@@ -23,9 +23,6 @@ vim.opt.splitright = true
 vim.opt.undofile = true
 vim.opt.title = true
 
-vim.lsp.enable('clangd')
-vim.diagnostic.config({ virtual_text = true })
-
 vim.g.mapleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y')
 vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+y$')
@@ -42,6 +39,8 @@ vim.keymap.set('n', '<leader>r', '<cmd>Pick buffers<cr>')
 vim.keymap.set('n', '<leader>h', '<cmd>Pick help<cr>')
 vim.keymap.set('n', '-', '<cmd>Oil<cr>')
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
+
+vim.lsp.enable('clangd')
 
 require('paq') {
     'neovim/nvim-lspconfig',
