@@ -1,7 +1,7 @@
-set $font 'CommitMono Nerd Font 10'
+set $font  'CommitMono Nerd Font 10'
 set $black '#000000'
 
-seat seat0 hide_cursor 5000
+seat seat0 hide_cursor 10000
 input type:pointer {
     accel_profile flat
     pointer_accel -0.3
@@ -22,8 +22,8 @@ default_border pixel
 hide_edge_borders --i3 smart
 
 exec swayidle -w \
-    timeout 300 "swaylock -fuc $black" \
-    timeout 300 "swaymsg 'output * power off'" \
+    timeout 600 "swaylock -fuc $black" \
+    timeout 600 "swaymsg 'output * power off'" \
         resume "swaymsg 'output * power on'" \
     before-sleep "swaylock -fuc $black"
 
@@ -40,7 +40,7 @@ bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
 bindsym Print exec grim
-bindsym Shift+Print exec slurp | grim -g -
+bindsym Shift+Print exec slurp | grim -g - - | wl-copy
 
 exec alacritty
 
@@ -66,6 +66,7 @@ bindsym Super+s split toggle
 bindsym Super+d layout toggle all
 
 bindsym Super+a focus parent
+
 bindsym Super+h focus left
 bindsym Super+j focus down
 bindsym Super+k focus up
@@ -86,8 +87,6 @@ bindsym Super+Shift+grave move scratchpad
 
 bindsym Super+Tab workspace back_and_forth
 bindsym Super+Shift+Tab move container to workspace back_and_forth
-
-bindsym Super+Shift+period move container to output next
 
 bindsym Super+1 workspace number 1
 bindsym Super+2 workspace number 2
