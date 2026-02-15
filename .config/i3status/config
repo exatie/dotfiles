@@ -1,44 +1,26 @@
-general {
-    interval = 5
-}
+general { interval = 1 }
 
-order += "disk /"
-order += "memory"
-order += "load"
-order += "cpu_usage"
-order += "volume master"
-order += "battery all"
-order += "time"
+order += 'memory'
+order += 'cpu_usage'
+order += 'volume master'
+order += 'battery all'
+order += 'time'
 
-disk / {
-    format = "ROOT %used / %total"
-}
+memory { format = '%used' }
 
-memory {
-    format = "RAM %used / %total"
-}
-
-load {
-    format = "LOAD %1min %5min %15min"
-}
-
-cpu_usage {
-    format = "CPU %usage"
-}
+cpu_usage { format = '%usage' }
 
 volume master {
-    format = "VOL %volume"
-    format_muted = "VOL M(%volume)"
+    format       = '%volume'
+    format_muted = '%volume'
 }
 
 battery all {
-    format = "%status %percentage %consumption"
-    format_down = ""
+    format             = '%status %percentage'
+    format_down        = ''
     last_full_capacity = true
-    low_threshold = 10
-    threshold_type = percentage
+    low_threshold      = 20
+    threshold_type     = percentage
 }
 
-time {
-    format = "%a %F %T"
-}
+time { format = '%a %F %T' }
