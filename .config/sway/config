@@ -1,31 +1,37 @@
-set $font  'CommitMono Nerd Font 10'
-set $black '#000000'
-
 seat seat0 hide_cursor 10000
 input type:pointer {
     accel_profile flat
     pointer_accel -0.3
 }
 input type:keyboard {
-    xkb_layout pl,pl
-    xkb_variant ,colemak_dh_ansi
-    xkb_options grp:alt_space_toggle
+    xkb_layout   pl
     repeat_delay 250
-    repeat_rate 50
+    repeat_rate  50
 }
 output * allow_tearing yes
 
-font $font
-title_align center
-titlebar_padding 1
-default_border pixel
-hide_edge_borders --i3 smart
+set $font  'CommitMono Nerd Font 10'
+set $black '#000000'
 
+exec alacritty
 exec swayidle -w \
     timeout 600 "swaylock -fuc $black" \
     timeout 600 "swaymsg 'output * power off'" \
         resume "swaymsg 'output * power on'" \
     before-sleep "swaylock -fuc $black"
+
+bindsym Super+Shift+q         kill
+bindsym Super+Shift+c         reload
+bindsym Super+BackSpace       exec swaylock -fuc $black
+bindsym Super+Shift+BackSpace exec swaymsg exit
+
+bindsym Super+Return  exec alacritty msg create-window || alacritty
+bindsym Super+w       exec firefox
+bindsym Super+e       exec pcmanfm
+bindsym Super+r       exec wmenu-run -f $font
+
+bindsym Print         exec grim
+bindsym Shift+Print   exec slurp | grim -g - - | wl-copy
 
 bindsym --locked XF86AudioMute exec \
     pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -37,35 +43,18 @@ bindsym --locked XF86AudioMicMute exec \
     pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym --locked XF86MonBrightnessUp   exec brightnessctl set 5%+
 
-bindsym Print exec grim
-bindsym Shift+Print exec slurp | grim -g - - | wl-copy
-
-exec alacritty
-
-bindsym Super+r exec wmenu-run -f $font
-bindsym Super+w exec firefox
-bindsym Super+e exec pcmanfm
-bindsym Super+Return exec alacritty msg create-window || alacritty
-
-bindsym Super+Shift+q kill
-bindsym Super+Shift+c reload
-bindsym Super+BackSpace exec swaylock -fuc $black
-bindsym Super+Shift+BackSpace exec swaymsg exit
-
-bindsym Super+f fullscreen
+bindsym Super+f       fullscreen
 bindsym Super+Shift+f fullscreen global
 
-floating_modifier Super
-bindsym Super+space focus mode_toggle
+bindsym Super+q           sticky toggle
+bindsym Super+space       focus mode_toggle
 bindsym Super+Shift+space floating toggle
-bindsym Super+Shift+s sticky toggle
 
-bindsym Super+s split toggle
-bindsym Super+d layout toggle all
-
-bindsym Super+a focus parent
+bindsym Super+a split  toggle
+bindsym Super+s layout toggle splith splitv
+bindsym Super+d layout toggle tabbed stacking
 
 bindsym Super+h focus left
 bindsym Super+j focus down
@@ -81,12 +70,6 @@ bindsym Super+Control+h resize shrink width
 bindsym Super+Control+j resize grow height
 bindsym Super+Control+k resize shrink height
 bindsym Super+Control+l resize grow width
-
-bindsym Super+grave scratchpad show
-bindsym Super+Shift+grave move scratchpad
-
-bindsym Super+Tab workspace back_and_forth
-bindsym Super+Shift+Tab move container to workspace back_and_forth
 
 bindsym Super+1 workspace number 1
 bindsym Super+2 workspace number 2
@@ -110,12 +93,27 @@ bindsym Super+Shift+8 move container to workspace number 8
 bindsym Super+Shift+9 move container to workspace number 9
 bindsym Super+Shift+0 move container to workspace number 10
 
+bindsym Super+Tab       workspace back_and_forth
+bindsym Super+Shift+Tab move container to workspace back_and_forth
+
+bindsym Super+grave       scratchpad show
+bindsym Super+Shift+grave move scratchpad
+
+floating_modifier Super
+
+font $font
+title_align center
+titlebar_padding 1
+default_border pixel
+hide_edge_borders --i3 smart
+
 bindsym Super+b bar mode toggle
 bar {
-    status_command i3status
-    separator_symbol ' │ '
-    position top
     modifier none
+    position top
+    height 15
+    status_command i3status
+    separator_symbol '  '
 }
 
 include local
